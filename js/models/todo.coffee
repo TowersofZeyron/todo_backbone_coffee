@@ -1,5 +1,3 @@
-app = app || {}
-
 # Todo Model
 
 app.Todo = Backbone.Model.extend
@@ -13,4 +11,3 @@ app.Todo = Backbone.Model.extend
 
 @CrazyMode = {}
 @crazyApp = {}
-   

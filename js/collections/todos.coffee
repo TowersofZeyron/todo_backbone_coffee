@@ -1,4 +1,4 @@
-app = app || {}
+
 
 # Todo Collection
 TodoList = Backbone.Collection.extend
@@ -20,3 +20,5 @@ TodoList = Backbone.Collection.extend
   # Todos are sorted by their original insertion order
   comparator: (todo)->
     todo.get 'order'
+
+app.TodoList = new TodoList()    
