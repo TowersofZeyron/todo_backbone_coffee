@@ -21,4 +21,5 @@ TodoList = Backbone.Collection.extend
   comparator: (todo)->
     todo.get 'order'
 
-app.TodoList = new TodoList()    
+# create a global collection of Todos
+app.Todos = new TodoList()

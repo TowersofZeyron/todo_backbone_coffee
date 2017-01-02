@@ -24,6 +24,6 @@
     }
   });
 
-  app.TodoList = new TodoList();
+  app.Todos = new TodoList();
 
 }).call(this);
