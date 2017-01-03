@@ -25,7 +25,25 @@ app.AppView = Backbone.View.extend
     app.Todos.fetch()
 
     # New, re-rendering the app just means refreshing the statistics
-    # The rest of the app doesn't change 
+    # The rest of the app doesn't change
+    render: ->
+      completed = app.Todos.completed().length
+      remaining = app.Todos.remaining().length
+
+      if app.Todos.length
+        this.$main.show()
+        this.$footer.show()
+        this.$footer.html this.statsTemplate
+          completed: completed
+          remaining: remaining
+
+        this.$("#filters li a")
+          .removeClass "selected"
+          .filter('[href="#/' + ( app.TodoFilter || '' ) +  '"]')
+          .addClass "selected"
+      else
+        this.$main.hide()
+        this.$footer.hide()
 
   addOne: (todo)->
     view = new app.TodoView({model: todo})

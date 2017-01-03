@@ -18,7 +18,26 @@
       this.listenTo(app.Todos, "change:completed", this.filterOne);
       this.listenTo(app.Todos, "filter", this.filterAll);
       this.listenTo(app.Todos, "all", this.render);
-      return app.Todos.fetch();
+      app.Todos.fetch();
+      return {
+        render: function() {
+          var completed, remaining;
+          completed = app.Todos.completed().length;
+          remaining = app.Todos.remaining().length;
+          if (app.Todos.length) {
+            this.$main.show();
+            this.$footer.show();
+            this.$footer.html(this.statsTemplate({
+              completed: completed,
+              remaining: remaining
+            }));
+            return this.$("#filters li a").removeClass("selected").filter('[href="#/' + (app.TodoFilter || '') + '"]').addClass("selected");
+          } else {
+            this.$main.hide();
+            return this.$footer.hide();
+          }
+        }
+      };
     },
     addOne: function(todo) {
       var view;
