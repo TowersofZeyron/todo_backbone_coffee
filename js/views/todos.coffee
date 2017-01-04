@@ -5,7 +5,9 @@
   tagName: "li"
   template: _.template( $("#item-template").html() )
   events:
-    "dbclick label": "edit"
+    "click .toggle": "toggleCompleted"
+    "dblclick label": "edit"
+    "click .destroy": "clear"
     "keypress .edit": "updateOnEnter"
     "blur .edit": "close"
 
@@ -13,12 +15,15 @@
     this.listenTo this.model, "change", this.render
 
   render: ->
+    console.log "rendering todo"
     this.$el.html this.template(this.model.attributes)
     this.$input = this.$(".edit")
     this
 
   edit: ->
+    alert "now editing"
     this.$el.addClass "editing"
+    this.$input.removeAttr("hidden")
     this.$input.focus()
 
   close: ->

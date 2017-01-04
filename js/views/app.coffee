@@ -51,10 +51,12 @@
 
   addOne: (todo)->
     view = new TodoView({model: todo})
+    alert "adding one todo"
     this.$("#todo-list").append view.render().el
 
   addAll: ->
     this.$("#todo-list").html ""
+    alert "adding all todos"
     Todos.each this.addOne, this
 
   filterOne: (todo)->

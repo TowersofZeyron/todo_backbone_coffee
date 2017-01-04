@@ -46,10 +46,12 @@
       view = new TodoView({
         model: todo
       });
+      alert("adding one todo");
       return this.$("#todo-list").append(view.render().el);
     },
     addAll: function() {
       this.$("#todo-list").html("");
+      alert("adding all todos");
       return Todos.each(this.addOne, this);
     },
     filterOne: function(todo) {
