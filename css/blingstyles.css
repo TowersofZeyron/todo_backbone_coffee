@@ -17,7 +17,11 @@ h1 {
   border: 0px;
   font-weight: 100;
   color: brown;
-  border-bottom: 1 px blue !important; }
+  border-bottom: 1 px blue !important;
+  margin-left: 50px; }
+
+.strikethrough {
+  text-decoration: line-through; }
 
 #new-todo {
   margin: 10 100px;
@@ -38,7 +42,8 @@ h1 {
   color: brown;
   border-bottom: 2px solid white;
   min-width: 400px;
-  padding: 10px; }
+  padding: 10px;
+  border-left: 2px white dashed; }
 
 .toggle {
   font-size: 40px;
