@@ -51,6 +51,13 @@ h1 {
 #todo-list li {
   list-style: none; }
 
+#info p {
+  font-weight: 300;
+  font-size: 24px;
+  font-family: serif;
+  margin: 20px 80px;
+  color: brown; }
+
 body {
   width: 100%;
   background: rgba(240, 230, 220, 0.7); }
