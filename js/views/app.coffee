@@ -74,7 +74,7 @@
   createOnEnter: (event)->
     if event.which != ENTER_KEY || !this.$input.val().trim()
       return
-    alert "creating a new Todo"
+    alert "creating a new Todo" + "js/views/coffee line 77"
     Todos.create this.newAttributes()
     this.$input.val ""
 
