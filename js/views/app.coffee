@@ -1,5 +1,7 @@
+`var app = app || {}`
+@TodoFilter = "all"
 
-app.AppView = Backbone.View.extend
+@AppView = Backbone.View.extend
   el: "#todoapp"
   statsTemplate: _.template $("#stats-template").html()
 
@@ -15,40 +17,73 @@ app.AppView = Backbone.View.extend
     this.$footer = this.$("#footer")
     this.$main = this.$("#main")
 
-    this.listenTo app.Todos, "add", this.addOne
-    this.listenTo app.Todos, "reset", this.addAll
-    this.listenTo app.Todos, "change:completed", this.filterOne
-    this.listenTo app.Todos, "filter", this.filterAll
-    this.listenTo app.Todos, "all", this.render
+    this.listenTo Todos, "add", this.addOne
+    this.listenTo Todos, "reset", this.addAll
+    this.listenTo Todos, "change:completed", this.filterOne
+    this.listenTo Todos, "filter", this.filterAll
+    this.listenTo Todos, "all", this.render
 
     # get the Todos from the store
-    app.Todos.fetch()
+    Todos.fetch()
 
-    # New, re-rendering the app just means refreshing the statistics
-    # The rest of the app doesn't change
-    render: ->
-      completed = app.Todos.completed().length
-      remaining = app.Todos.remaining().length
+  # New, re-rendering the app just means refreshing the statistics
+  # The rest of the app doesn't change
+  render: ->
+    completed = Todos.completed().length
+    remaining = Todos.remaining().length
 
-      if app.Todos.length
-        this.$main.show()
-        this.$footer.show()
-        this.$footer.html this.statsTemplate
-          completed: completed
-          remaining: remaining
+    if Todos.length
+      this.$main.show()
+      this.$footer.show()
+      this.$footer.html this.statsTemplate
+        completed: completed
+        remaining: remaining
 
-        this.$("#filters li a")
-          .removeClass "selected"
-          .filter('[href="#/' + ( app.TodoFilter || '' ) +  '"]')
-          .addClass "selected"
-      else
-        this.$main.hide()
-        this.$footer.hide()
+
+      this.$("#filters li a")
+        .removeClass "selected"
+        .filter('[href="#/' + ( TodoFilter || '' ) +  '"]')
+        .addClass "selected"
+    else
+      this.$main.hide()
+      this.$footer.hide()
+    this.allCheckbox.checked = !remaining
 
   addOne: (todo)->
-    view = new app.TodoView({model: todo})
+    view = new TodoView({model: todo})
     this.$("#todo-list").append view.render().el
 
   addAll: ->
     this.$("#todo-list").html ""
-    app.Todos.each this.addOne, this
+    Todos.each this.addOne, this
+
+  filterOne: (todo)->
+    todo.trigger "visible"
+
+  filterAll: ->
+    Todos.each this.filterOne, this
+
+  # general attributes for a new Todo item
+  newAttributes: ->
+    title: this.$input.val().trim()
+    order: Todos.nextOrder()
+    completed: false
+
+  # when you hit return in the todo input field, create a new Todo model
+  # persisting it to localStorage
+  createOnEnter: (event)->
+    if event.which != ENTER_KEY || !this.$input.val().trim()
+      return
+    alert "creating a new Todo"
+    Todos.create this.newAttributes()
+    this.$input.val ""
+
+  clearCompleted: ->
+    _.invoke Todos.completed(), "destroy"
+    return false
+
+  toggleAllComplete: ->
+    completed = this.allCheckbox.checked
+
+    Todos.each (todo)->
+      todo.save {"completed": completed}

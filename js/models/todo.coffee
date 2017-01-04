@@ -1,6 +1,7 @@
+`var app = app || {}`
 # Todo Model
 
-app.Todo = Backbone.Model.extend
+@Todo = Backbone.Model.extend
   defaults:
     title: ''
     completed: false

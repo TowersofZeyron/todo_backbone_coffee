@@ -1,8 +1,9 @@
+`var app = app || {}`
 
 
 # Todo Collection
-TodoList = Backbone.Collection.extend
-  model: app.Todo
+@TodoList = Backbone.Collection.extend
+  model: Todo
   localStorage: new Backbone.LocalStorage 'todos-backbone'
 
   completed: ->
@@ -22,4 +23,4 @@ TodoList = Backbone.Collection.extend
     todo.get 'order'
 
 # create a global collection of Todos
-app.Todos = new TodoList()
+@Todos = new TodoList()
