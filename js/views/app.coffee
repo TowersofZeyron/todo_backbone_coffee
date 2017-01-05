@@ -50,12 +50,12 @@
 
   addOne: (todo)->
     view = new TodoView({model: todo})
-    alert "adding one todo"
+    console.log "adding one todo"
     this.$("#todo-list").append view.render().el
 
   addAll: ->
     this.$("#todo-list").html ""
-    alert "adding all todos"
+    console.log "adding all todos"
     Todos.each this.addOne, this
 
   filterOne: (todo)->
@@ -75,7 +75,7 @@
   createOnEnter: (event)->
     if event.which != ENTER_KEY || !this.$input.val().trim()
       return
-    alert "creating a new Todo" + "js/views/coffee line 77"
+    console.log "creating a new Todo" 
     Todos.create this.newAttributes()
     this.$input.val ""
 

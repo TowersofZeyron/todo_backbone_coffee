@@ -44,12 +44,12 @@
       view = new TodoView({
         model: todo
       });
-      alert("adding one todo");
+      console.log("adding one todo");
       return this.$("#todo-list").append(view.render().el);
     },
     addAll: function() {
       this.$("#todo-list").html("");
-      alert("adding all todos");
+      console.log("adding all todos");
       return Todos.each(this.addOne, this);
     },
     filterOne: function(todo) {
@@ -69,7 +69,7 @@
       if (event.which !== ENTER_KEY || !this.$input.val().trim()) {
         return;
       }
-      alert("creating a new Todo" + "js/views/coffee line 77");
+      console.log("creating a new Todo");
       Todos.create(this.newAttributes());
       return this.$input.val("");
     },

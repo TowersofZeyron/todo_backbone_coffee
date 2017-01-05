@@ -36,7 +36,7 @@
       return this.model.toggle();
     },
     edit: function() {
-      alert("now editing");
+      console.log("now editing");
       this.$el.addClass("editing");
       this.$input.removeAttr("hidden");
       return this.$input.focus();

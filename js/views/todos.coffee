@@ -37,7 +37,7 @@
     this.model.toggle()
 
   edit: ->
-    alert "now editing"
+    console.log "now editing"
     this.$el.addClass "editing"
     this.$input.removeAttr("hidden")
     this.$input.focus()
