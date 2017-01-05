@@ -1,5 +1,5 @@
 `var app = app || {}`
-@TodoFilter = "all"
+# @TodoFilter = "completed"
 
 @AppView = Backbone.View.extend
   el: "#todoapp"
@@ -38,7 +38,6 @@
       this.$footer.html this.statsTemplate
         completed: completed
         remaining: remaining
-
 
       this.$("#filters li a")
         .removeClass "selected"

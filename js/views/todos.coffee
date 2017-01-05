@@ -57,4 +57,4 @@
       this.close()
 
   clear: ->
-    this.model.destroy()    
+    this.model.destroy()

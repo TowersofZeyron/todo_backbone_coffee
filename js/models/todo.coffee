@@ -9,6 +9,3 @@
   toggle: ->
     this.save
         completed: !this.get 'completed'
-
-@CrazyMode = {}
-@crazyApp = {}

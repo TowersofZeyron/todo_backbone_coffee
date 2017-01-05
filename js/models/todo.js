@@ -13,8 +13,4 @@
     }
   });
 
-  this.CrazyMode = {};
-
-  this.crazyApp = {};
-
 }).call(this);
